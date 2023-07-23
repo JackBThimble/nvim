@@ -1,7 +1,6 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
-
 vim.o.hlsearch = false
 vim.wo.number = true
 vim.o.relativenumber = true

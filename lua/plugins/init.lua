@@ -49,6 +49,26 @@ require('lazy').setup({
   },
 
   {
+    'simrat39/rust-tools.nvim',
+    config = function()
+      local rt = require("rust-tools")
+      rt.setup({
+        on_attach = function(_, bufnr)
+        -- Hover actions
+          vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+          vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end,
+      })
+    end,
+    
+  },
+  {
+    'nvim-lua/plenary.nvim'
+  },
+  {
+    'mfussenegger/nvim-dap'
+  },
+  {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -68,7 +88,28 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  {
+    'folke/which-key.nvim',
+    opts = {
+      plugins = {
+        marks = true,
+        registers = true,
+        spelling = {
+          enabled = true,
+          suggestions = 20,
+        },
+        presets = {
+          operators = true,
+          motions = true,
+          text_objects = true,
+          windows = true,
+          nav = true,
+          z = true,
+          g = true,
+        },
+      },
+    },
+  },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -89,14 +130,14 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
+  -- {
+  --   -- Theme inspired by Atom
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  -- },
 
   {
     -- Set lualine as statusline
@@ -105,7 +146,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
         globalstatus = true,
@@ -117,6 +158,15 @@ require('lazy').setup({
     },
   },
 
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({
+      })
+      vim.cmd('colorscheme rose-pine-moon')
+    end,
+  },
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -179,7 +229,33 @@ require('lazy').setup({
     "akinsho/toggleterm.nvim",
     version = "*",
     config = true,
+  },
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
+  
+  {
+    "uga-rosa/ccc.nvim",
+    config = function()
+      local ccc = require("ccc")
+      local mapping = ccc.mapping
+
+      ccc.setup({
+        highlighter = {
+          auto_enable = true,
+          lsp = true,
+        },
+      })
+    end,
+  },
+  {
+    "elkowar/yuck.vim",
+    enabled = true
   }
+  
 }, {})
 
 require("plugins.lsp")

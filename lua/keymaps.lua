@@ -39,5 +39,5 @@ map('n', '<leader>tr', "<cmd>TroubleToggle lsp_references<cr>", { silent = true,
 -- Terminal
 map({ 'n', 'v', 'i', 't' }, '<A-h>', "<cmd>ToggleTerm size=40 direction=horizontal<cr>", { silent = true, noremap = true, desc = "Toggle horizontal terminal" } )
 
-map({ 'n', 'v' }, '<leader>th', "<cmd>ToggleTerm size=40 direction=horizontal<cr>", {silent = true, noremap = true, desc = "Toggle horizontal terminal" })
+map({ 'n', 'v' }, '<leader>th', "<cmd>ToggleTerm direction=horizontal<cr>", {silent = true, noremap = true, desc = "Toggle horizontal terminal" })
 map({ 'n', 'v' }, '<leader>tf', "<cmd>ToggleTerm direction=float<cr>", { silent = true, noremap = true, desc = "Toggle float terminal" })
